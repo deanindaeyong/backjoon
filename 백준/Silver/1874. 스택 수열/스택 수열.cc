@@ -1,42 +1,43 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <stack>
+#include <vector>
 using namespace std;
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
-    int n;
-    cin >> n;
-
-    stack<int> st;
-    vector<char> result;
-    int next = 1; // 다음에 push할 숫자
-
-    bool possible = true;
-
-    for (int i = 0; i < n; ++i) {
-        int target;
-        cin >> target;
-
-        // 목표 숫자까지 push
-        while (next <= target) {
-            st.push(next++);
-            result.push_back('+');
-        }
-
-        // 스택 top이 target이면 pop
-        if (!st.empty() && st.top() == target) {
-            st.pop();
-            result.push_back('-');
-        } else {
-            possible = false;
-            break;
-        }
+int n;
+int main() 
+{   ios::sync_with_stdio(0);
+    cin.tie(0);
+    cin>>n;
+    stack<int> s;
+    vector<char> v;
+    bool possible=false;
+     int cnt=1;
+    for(int i=0;i<n;i++){
+      int target;
+      
+      cin>>target;
+     
+      while(cnt<=target){
+        s.push(cnt++);
+        v.push_back('+');
+        
+      }
+      if(!s.empty()&&s.top()==target){
+        s.pop();
+        v.push_back('-');
+      }else{
+        possible=true;
+        break;
+      }
+      
     }
-
-    if (!possible) {
-        cout << "NO\n";
-    } else {
-        for (char c : result) cout << c << '\n';
+    int len=v.size();
+    for(int i=0;i<len;i++){
+      if(possible){
+        cout<<"NO";
+        return 0;
+      }
+      else cout<<v[i]<<'\n';
+   
     }
+    return 0;
 }
